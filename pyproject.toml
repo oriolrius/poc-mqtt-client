@@ -9,7 +9,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
 ]
 authors = [
-    { name = "Your Name" }
+    { name = "Oriol Rius", email = "oriol@joor.net" },
 ]
 keywords = ["mqtt", "ssl", "tls", "iot"]
 classifiers = [
@@ -21,7 +21,7 @@ classifiers = [
 ]
 
 [project.urls]
-Repository = "https://github.com/username/mqtt-client"
+Repository = "https://github.com/oriol/poc-mqtt-client"
 
 [build-system]
 requires = ["hatchling"]
