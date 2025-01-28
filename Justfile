@@ -17,13 +17,33 @@ ssl_client_with_cacert_and_client_cert:
       -pass "pass:${KEY_PASSPHRASE}" \
       ${MQTT_HOST}:${MQTT_PORT}
 
-pub +ARGS:
+pub_letsencrypt +ARGS:
   mosquitto_pub \
+      -d -h ${MQTT_HOST} -p ${MQTT_PORT} {{ ARGS }}
+
+sub_letsencrypt +ARGS:
+  mosquitto_sub \
+      -d -h ${MQTT_HOST} -p ${MQTT_PORT} {{ ARGS }}
+
+pub_with_cacert +ARGS:
+  mosquitto_pub \
+      --cafile ${CA_FILE} \
+      -d -h ${MQTT_HOST} -p ${MQTT_PORT} {{ ARGS }}
+
+sub_with_cacert +ARGS:
+  mosquitto_sub \
       --cafile ${CA_FILE} \
       -d -h ${MQTT_HOST} -p ${MQTT_PORT} {{ ARGS }}
 
 pub_with_client_certificate +ARGS: 
   mosquitto_pub \
+      --cafile ${CA_FILE} \
+      --cert ${CERT_FILE} \
+      --key ${KEY_FILE} \
+      -d -h ${MQTT_HOST} -p ${MQTT_PORT} {{ ARGS }}
+
+sub_with_client_certificate +ARGS:
+  mosquitto_sub \
       --cafile ${CA_FILE} \
       --cert ${CERT_FILE} \
       --key ${KEY_FILE} \

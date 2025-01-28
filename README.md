@@ -75,14 +75,46 @@ just ssl_client_with_cacert_and_client_cert
 
 You can use the `mosquitto_sub` and `mosquitto_pub` commands to check the connection to the MQTT broker. But it doesn't support passphrase protected keys for the client, the passphrase must be removed from the key file. Or, you can provide the passphrase interactively when the command is executed.
 
+### Self-signed certificates in the server side
+
+Start the subscriber with the following command:
+
 ```bash
-just pub -t the_topic -m "the_message"
+just sub_with_cacert -t the_topic
 ```
 
 and in another terminal:
 
 ```bash
-just sub -t the_topic
+just pub_with_cacert -t the_topic -m "the_message"
+```
+
+### Using client certificates
+
+Start the subscriber with the following command:
+
+```bash
+just sub_with_client_certificate -t the_topic
+```
+
+and in another terminal:
+
+```bash
+just pub_with_client_certificate -t the_topic -m "the_message"
+```
+
+### Using Let's Encrypt certificates in the server
+
+Start the subscriber with the following command:
+
+```bash
+just sub_letsencrypt -t the_topic
+```
+
+and in another terminal:
+
+```bash
+just pub_letsencrypt -t the_topic -m "the_message"
 ```
 
 ## Running the MQTT client based on the python scripts
